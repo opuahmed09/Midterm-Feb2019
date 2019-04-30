@@ -14,6 +14,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class JsonReaderUtil {
 
     /*
@@ -36,34 +37,71 @@ public class JsonReaderUtil {
      */
 
     public static void main(String[] args) throws MalformedURLException, IOException {
-        String sURL = "http://info.venturepulse.org:8080/service-webapp/api/AllEmployeeResources";
-        Employee emp = null;
-        List<Employee> empList = new ArrayList<>();
-        URL url = new URL(sURL);
-        URLConnection request = url.openConnection();
-        request.connect();
+        String urls = "http://info.venturepulse.org:8080/service-webapp/api/AllEmployeeResources";
+
+        List<Employee> emp = new ArrayList<Employee>();
+        Employee employee;
+
+        URL ur = new URL(urls);
+
+        URLConnection request = ur.openConnection();
+        request.connect();  // hitting the url
+
         JsonArray jsonArray = null;
         JsonParser jp = new JsonParser();
-        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
-        if (root instanceof JsonObject) {
-            JsonObject rootObj = root.getAsJsonObject();
-        } else if (root instanceof JsonArray) {
-            jsonArray = root.getAsJsonArray();
+        JsonElement element = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+
+        if (element instanceof JsonObject) {
+            JsonObject rootobj = element.getAsJsonObject();
+        } else if (element instanceof JsonArray) {
+            jsonArray = element.getAsJsonArray();
         }
+
+        employee = new Employee();
+
+
         for (int i = 0; i < jsonArray.size() - 1; i++) {
             try {
-                JsonObject jsonobject = jsonArray.get(i).getAsJsonObject();
-                //you code start here
-                String empEmail = jsonobject.get("empName").toString();
 
-            } catch (Exception ex) {
+                JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
+
+
+                String empName = jsonObject.get("empName").toString();
+                employee.setEmpName(empName);
+
+                String empEmail = jsonObject.get("empEmail").toString();
+                employee.setEmpEmail(empEmail);
+
+                String salary = jsonObject.get("salary").toString();
+                employee.setSalary(salary);
+
+                String department = jsonObject.get("department").toString();
+                employee.setSalary(department);
+                employee = new Employee(employee.getEmpName(), employee.getEmpEmail(), employee.getSalary()
+                        , employee.getDepartment());
+
+
+                emp.add(employee);
+
+
+            } catch (Exception e) {
+
 
             }
+
+
         }
-        //Print to the console.
-        for (Employee entry : empList) {
-            System.out.println(entry.getEmpEmail() + " " + entry.getEmpName() + " " + entry.getSalary() + " " + entry.getDepartment());
+
+
+
+        for (Employee e : emp) {
+            System.out.println(e.getEmpName() + " \n " + e.getEmpEmail() + "\n" + e.getSalary() + "\n" + e.getDepartment());
         }
+
+
     }
+
+
+
 
 }

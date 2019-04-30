@@ -36,6 +36,46 @@ public class Numbers {
         algo.insertionSort(num);
         long insertionSortExecutionTime = algo.executionTime;
         System.out.println("Total Execution Time of " + num.length + " numbers in Insertion Sort take: " + insertionSortExecutionTime + " milli sec");
+        connectToSqlDB.insertDataFromArrayToSqlTable(num, "insertion_sort", "SortingNumbers");
+        printValue(numbers);
+        randomize(num,n);
+        algo.bucketSort(num);
+        long bucketSortExecutionTime = algo.executionTime;
+        System.out.println("Total Execution Time of " + num.length + " numbers in BucketSort take: " + bucketSortExecutionTime + " milli sec");
+        connectToSqlDB.insertDataFromArrayToSqlTable(num, "bucket_sort", "SortingNumbers");
+        printValue(numbers);
+        randomize(num,n);
+        algo.bubbleSort(num);
+        long bubbleSortExecutiontime = algo.executionTime;
+        System.out.println("Total Execution Time of " + num.length + " numbers in bubbleSort Sort take: " + bubbleSortExecutiontime+ " milli sec");
+        connectToSqlDB.insertDataFromArrayToSqlTable(num, "bubbleSort", "SortingNumbers");
+        printValue(numbers);
+        randomize(num,n);
+        algo.  mergeSort(num);
+        long mergeSortExecutionTime = algo.executionTime;
+        System.out.println("Total Execution Time of " + num.length + " numbers in merge Sort take: " + mergeSortExecutionTime + " milli sec");
+        connectToSqlDB.insertDataFromArrayToSqlTable(num, "merge_sort", "SortingNumbers");
+        printValue(numbers);
+        randomize(num,n);
+        algo.quickSort(num);
+        long quickSortExecutionTime = algo.executionTime;
+        System.out.println("Total Execution Time of " + num.length + " numbers in quick Sort take: " + quickSortExecutionTime + " milli sec");
+        connectToSqlDB.insertDataFromArrayToSqlTable(num, "quick_sort", "SortingNumbers");
+        printValue(numbers);
+        randomize(num,n);
+        algo.heapSort(num);
+        long heapSortExecutionTime = algo.executionTime;
+        System.out.println("Total Execution Time of " + num.length + " numbers in heap Sort take: " + heapSortExecutionTime + " milli sec");
+        connectToSqlDB.insertDataFromArrayToSqlTable(num, "heap_sort", "SortingNumbers");
+        printValue(numbers);
+        randomize(num,n);
+        algo.shellSort(num);
+        long shellSortExecutionTime = algo.executionTime;
+        System.out.println("Total Execution Time of " + num.length + " numbers in shell Sort take: " + shellSortExecutionTime + " milli sec");
+        connectToSqlDB.insertDataFromArrayToSqlTable(num, "shell_sort", "SortingNumbers");
+        printValue(numbers);
+        randomize(num,n);
+
 
         //By following above, Continue for rest of the Sorting Algorithm....
 

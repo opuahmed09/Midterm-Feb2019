@@ -1,8 +1,7 @@
 package design;
 
 import java.util.Scanner;
-
-public class EmployeeInfo {
+public class EmployeeInfo extends EmployeeinfoAbstract implements Employee{
 
     /*This class can be implemented from Employee interface then add additional methods in EmployeeInfo class.
      * Also, Employee interface can be implemented into an abstract class.So create an Abstract class
@@ -20,7 +19,10 @@ public class EmployeeInfo {
     /*
      * declare few static and final fields and some non-static fields
      */
-    static String companyName;
+   private  static String companyName;
+   private String name;
+   public static double salary;
+   private int employeeID,employeeAge;
 
     /*
      * You must implement the logic for below 2 methods and
@@ -33,11 +35,22 @@ public class EmployeeInfo {
      * Must implement below constructor.
      */
     public EmployeeInfo(int employeeId) {
+        this.employeeID=employeeId;
+        System.out.println(employeeId);
 
     }
 
     public EmployeeInfo(String name, int employeeId) {
+        this.name=name;
+        this.employeeID=employeeId;
+        System.out.println(name+ " "+ employeeId);
 
+    }
+    public EmployeeInfo(String name, int employeeID,int employeeAge){
+        this.name=name;
+        this.employeeID=employeeID;
+        this.employeeAge=employeeAge;
+        System.out.println(name+ " "+ employeeAge);
     }
 
     /*
@@ -48,8 +61,16 @@ public class EmployeeInfo {
      * So you probably need to send 2 arguments.
      *
      */
-    public static int calculateEmployeeBonus(int numberOfYearsWithCompany) {
+    public static int calculateEmployeeBonus(int salary,int performance) {
         int total = 0;
+        double bperformance= .10;
+        double avg_performance= .08;
+        if (performance>8){
+            total= (int) (salary * bperformance);
+        }else {
+            total= (int) (salary *avg_performance);
+        }
+        System.out.println("Employee bonus= "+ total+"Dollar");
         return total;
     }
 
@@ -59,8 +80,8 @@ public class EmployeeInfo {
      * Hints: pension will be 5% of the salary for 1 year, 10% for 2 years with the company and so on.
      *
      */
-    public static int calculateEmployeePension() {
-        int total = 0;
+    public static int calculateEmployeePension(int i) {
+        int ptotal = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("Please enter start date in format (example: May,2015): ");
         String joiningDate = sc.nextLine();
@@ -70,10 +91,67 @@ public class EmployeeInfo {
         String convertedTodaysDate = DateConversion.convertDate(todaysDate);
 
         //implement numbers of year from above two dates
-        //Calculate pension
+
+        String startyer=convertedJoiningDate.substring(convertedJoiningDate.length()-4);
+        String currentdate= convertedJoiningDate.substring(convertedJoiningDate.length()-4);
+        int strat=Integer.parseInt(startyer);
+        int current=Integer.parseInt(currentdate);
+        int work=strat-current;
 
 
-        return total;
+        //calculate pension
+        if(work==1){
+            ptotal= (int) (salary*0.5);
+        }else if (work==2){
+            ptotal= (int) (salary*1.0);
+        }else if (work<=1){
+            ptotal=0;
+        }
+        System.out.println("you're pension are = "+ptotal);
+
+
+
+        return ptotal;
+    }
+    public String setname(String name){
+        this.name=name;
+        return name;
+    }
+    public String getNamet(){
+        return name;
+    }
+    public void professional(){
+        System.out.println("Employee have to be profissional");
+    }
+    @Override
+    public int EmployeeID(){
+        return 0;
+    }
+
+
+    @Override
+    public int employeeId() {
+        return 0;
+    }
+
+    @Override
+    public String employeeName(){
+        return null;
+    }
+    @Override
+    public void assignDepartment() {
+    }
+
+    @Override
+    public int calculateSalary() {
+        return 0;
+    }
+
+
+    @Override
+    public void benefitLayout() {
+
+
     }
 
     private static class DateConversion {
@@ -91,6 +169,12 @@ public class EmployeeInfo {
 
         public static int whichMonth(String givenMonth) {
             Months months = Months.valueOf(givenMonth);
+        Months months=null;
+        try {
+            months = Months.valueOf(givenMonth);
+        }catch(IllegalArgumentException e){
+            System.out.println("you're date in wrog foramt,please try again with correct form");
+        }
             int date = 0;
             switch (months) {
                 case January:

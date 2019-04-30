@@ -12,6 +12,20 @@ public class PrimeNumber {
          * Use any databases[MongoDB, Oracle, MySql] to store data and retrieve data.
          *
          */
+        String pnumber="";
+        for(int t=2;t<=100000; t++){
+            int count =0;
+            for (int n=t;n>=1;n--){
+                if (t%n==0){
+                    count=count+1;
+                }
+            }
+            if (count==2){
+                pnumber=pnumber+t+" ";
+
+            }
+        }
+        System.out.println("Prime Numbers for 2 to 1000 are : "+pnumber);
 
     }
 
